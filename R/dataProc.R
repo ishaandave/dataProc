@@ -1,5 +1,3 @@
-# Hello, world!
-
 
 dataProcessing = function (data, n) {
   # getting variable names and number of unique levels in each of them
