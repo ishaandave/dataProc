@@ -1,5 +1,5 @@
 
-dataProcessing = function (data, n) {
+dataProc = function (data, n) {
   # getting variable names and number of unique levels in each of them
   levelsEachVariable = data.frame(nLevels = double(),
                                   var = character())
