@@ -18,7 +18,10 @@ dataProc = function (data, n, seed) {
 
   ## getting distribution of each variable and randomly sampling from that to get new dataset
 
-  set.seed(seed)
+  if (!missing(seed)) {
+    set.seed(seed)
+  }
+
 
   for (i in 1:ncol(data))
   {
