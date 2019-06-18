@@ -39,4 +39,3 @@ dataProcessing = function (data, n) {
   return(data.frame(simData))
 }
 
-dataProcessing(nodedata, 100)
