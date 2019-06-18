@@ -1,4 +1,4 @@
-
+install.packages("TeachingDemos")
 dataProc = function (data, n, seed) {
   # getting variable names and number of unique levels in each of them
   levelsEachVariable = data.frame(nLevels = double(),
@@ -23,16 +23,20 @@ dataProc = function (data, n, seed) {
   }
 
 
-  for (i in 1:ncol(data))
-  {
+  for (i in 1:ncol(data))  {
 
     if (length(unique(data[,i])) < 5){
       simData[,i] = sample(c(as.character(as.data.frame(table(data[,i]))$Var1)), n, TRUE,
                            prob = c(as.data.frame(table(data[,i]))$Freq)
       )
     }
-    else  {
-      simData[,i] = rnorm(n, mean = mean(data[,i]), sd = sqrt(var(data[,i])) )
+    else if ((dat[,i]%% 1) != 0) {
+      nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
+    } else {
+      return(0)
+    } {
+
+      simData[,i] = (rnorm(n, mean = mean(data[,i]), sd = sqrt(var(data[,i]))))
 
     }
     names(simData) = names(data)
