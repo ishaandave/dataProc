@@ -1,5 +1,5 @@
 
-dataProc = function (data, n) {
+dataProc = function (data, n, seed) {
   # getting variable names and number of unique levels in each of them
   levelsEachVariable = data.frame(nLevels = double(),
                                   var = character())
@@ -18,9 +18,11 @@ dataProc = function (data, n) {
 
   ## getting distribution of each variable and randomly sampling from that to get new dataset
 
+  set.seed(seed)
+
   for (i in 1:ncol(data))
   {
-    set.seed(1234)
+
     if (length(unique(data[,i])) < 5){
       simData[,i] = sample(c(as.character(as.data.frame(table(data[,i]))$Var1)), n, TRUE,
                            prob = c(as.data.frame(table(data[,i]))$Freq)
@@ -33,7 +35,8 @@ dataProc = function (data, n) {
     names(simData) = names(data)
 
   } #close for loop
-  View(simData)
+
   return(data.frame(simData))
 }
+
 
