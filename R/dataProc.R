@@ -32,8 +32,8 @@ dataProc = function (data, n, seed) {
       )
     }
     else  {
-      simData[,i] = round(rnorm(n, mean = mean(data[,i]), sd = sqrt(var(data[,i])) )
-      )
+      simData[,i] = rnorm(n, mean = mean(data[,i]), sd = sqrt(var(data[,i])) )
+
     }
     names(simData) = names(data)
 
