@@ -1,19 +1,20 @@
-install.packages("TeachingDemos")
-dataProc = function (data, n, seed) {
+
+dataProc = function (inputData, n, seed) {
   # getting variable names and number of unique levels in each of them
   levelsEachVariable = data.frame(nLevels = double(),
                                   var = character())
 
-  for (i in 1:ncol(data)){
-    levelsEachVariable[i,1] = length(unique(data[,i]))
+
+
+  for (i in 1:ncol(inputData)){
+    levelsEachVariable[i,1] = length(unique(inputData[,i]))
   }
 
-  levelsEachVariable$var = colnames(data)
+  levelsEachVariable$var = colnames(inputData)
 
 
-
-  simData <- data.frame(matrix(ncol = ncol(data), nrow = n))
-  colnames(simData) <- paste0("var", c(1:ncol(data)))
+  simData <- data.frame(matrix( nrow = n, ncol = ncol(inputData)))
+  colnames(simData) <- paste0("var", c(1:ncol(inputData)))
 
 
   ## getting distribution of each variable and randomly sampling from that to get new dataset
@@ -22,24 +23,34 @@ dataProc = function (data, n, seed) {
     set.seed(seed)
   }
 
+  for (i in 1:ncol(inputData))  {
 
-  for (i in 1:ncol(data))  {
-
-    if (length(unique(data[,i])) < 5){
-      simData[,i] = sample(c(as.character(as.data.frame(table(data[,i]))$Var1)), n, TRUE,
-                           prob = c(as.data.frame(table(data[,i]))$Freq)
+    if (length(unique(inputData[,i])) < 5){
+      simData[,i] = sample(c(as.character(as.data.frame(table(inputData[,i]))$Var1)), n, TRUE,
+                           prob = c(as.data.frame(table(inputData[,i]))$Freq)
       )
     }
-    else if ((dat[,i]%% 1) != 0) {
-      nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
-    } else {
-      return(0)
-    } {
+    else if (mean((inputData[,i]%% 1) != 0, na.rm = T)) {
+      simData[,i] = rnorm(n, mean = mean(inputData[,i], na.rm = T), sd = sqrt(var(inputData[,i], na.rm = T)))
+      }
 
-      simData[,i] = (rnorm(n, mean = mean(data[,i]), sd = sqrt(var(data[,i]))))
-
+    else {
+      simData[,i] = round(rnorm(n, mean = mean(inputData[,i]), sd = sqrt(var(inputData[,i]))))
     }
-    names(simData) = names(data)
+
+
+    for (j in 1:nrow(inputData)){
+
+      if (is.na(inputData[j, i])) {
+        simData[j, i] = NA
+      }
+
+      else if (inputData[j, i]== "")  {
+        simData[j, i] = ""
+      }
+    }
+
+    names(simData) = names(inputData)
 
   } #close for loop
 
