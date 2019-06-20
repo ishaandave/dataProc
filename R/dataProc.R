@@ -15,10 +15,10 @@ dataProc = function (inputData, n, seed) {
 
 
 
-  for (i in 1:ncol(inputData))  { # 2
+  for (i in 1:ncol(inputData))  { # (1)
 
     if (all(is.na(inputData[,i])) |
-           (all(is.character(inputData[,i])) & length(unique(inputData[,i])) > 5)) next
+           (all(is.character(inputData[,i])) & length(unique(inputData[,i])) == nrow(inputData))) next
 
      if (length(unique(inputData[,i])) < 6 | all(is.factor(inputData[,i]))){
 
@@ -29,34 +29,34 @@ dataProc = function (inputData, n, seed) {
 
 
     else if (mean(inputData[,i] %% 1, na.rm = T) == 0) {
+
       simData[,i] = round(rtruncnorm(n,
-                                     a = min(inputData[,i]), mean = mean(inputData[,i], na.rm = T),
-                                     sd = sqrt(var(inputData[,i], na.rm = T))))
+                                     a = min(inputData[,i], na.rm = T), mean = mean(inputData[,i], na.rm = T),
+                                     sd = sd(inputData[,i], na.rm = T)))
       }
 
     else {
       simData[,i] = rtruncnorm(n,
-                               a = min(inputData[,i]), mean = mean(inputData[,i], na.rm = T),
-                               sd = sqrt(var(inputData[,i], na.rm = T)))
+                               a = min(inputData[,i], na.rm = T), mean = mean(inputData[,i], na.rm = T),
+                               sd = sd(inputData[,i], na.rm = T))
     }
 
-     for (j in 1:nrow(inputData)) { # 3
+     for (j in 1:nrow(inputData)) { # (2)
     #
-      if (is.na(inputData[j, i] )) {
+      if (is.na(inputData[j, i])) {
         simData[c(which(is.na(inputData[,i]))), i] = NA
       }
-    #
-      else if (inputData[j, i]== "")  {
-        simData[c(which(inputData[,i]=="")), i] = ""
-      }
-    } # 3
+    # #
+    #   else if (inputData[j, i]== "")  {
+    #     simData[c(which(inputData[,i]=="")), i] = ""
+    #   }
+     } # (2)
 
     names(simData) = names(inputData)
 
-  } #close big for loop #2
+  } #close big for loop (1)
     View(simData)
 
   return(data.frame(simData))
 }
-
 
