@@ -23,20 +23,22 @@ dataProc = function (inputData, n, seed) {
 
      if (length(unique(inputData[,i])) < 6 | all(is.factor(inputData[,i]))){
 
-      simData[,i] = sample(c(as.character(as.data.frame(table(inputData[,i]))$Var1)), nrow(simData), TRUE,
+      simData[,i] = sample(c(as.character(as.data.frame(table(inputData[,i]))$Var1)), n, TRUE,
                            prob = c(as.data.frame(table(inputData[,i]))$Freq)
                           )
       }
 
 
     else if (mean(inputData[,i] %% 1, na.rm = T) == 0) {
-      simData[,i] = round(rtruncnorm(nrow(simData),
-                                     a = min(inputData[,i]), mean = mean(inputData[,i], na.rm = T), sd = sqrt(var(inputData[,i], na.rm = T))))
+      simData[,i] = round(rtruncnorm(n,
+                                     a = min(inputData[,i]), mean = mean(inputData[,i], na.rm = T),
+                                     sd = sqrt(var(inputData[,i], na.rm = T))))
       }
 
     else {
-      simData[,i] = rtruncnorm(nrow(simData),
-                               a = min(inputData[,i]), mean = mean(inputData[,i], na.rm = T), sd = sqrt(var(inputData[,i], na.rm = T)))
+      simData[,i] = rtruncnorm(n,
+                               a = min(inputData[,i]), mean = mean(inputData[,i], na.rm = T),
+                               sd = sqrt(var(inputData[,i], na.rm = T)))
     }
 
      for (j in 1:nrow(inputData)) { # 3
@@ -53,9 +55,10 @@ dataProc = function (inputData, n, seed) {
     names(simData) = names(inputData)
 
   } #close big for loop #2
-  View(simData)
-  print(nrow(simData))
+    View(simData)
+
   return(data.frame(simData))
 }
+
 
 
