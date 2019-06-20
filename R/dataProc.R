@@ -1,4 +1,5 @@
 library(truncnorm)
+
 dataProc = function (inputData, n, seed) {
 
 
@@ -16,7 +17,8 @@ dataProc = function (inputData, n, seed) {
 
   for (i in 1:ncol(inputData))  { # 2
 
-    if (all(is.na(inputData[,i]))) next
+    if (all(is.na(inputData[,i])) |
+           (all(is.character(inputData[,i])) & length(unique(inputData[,i])) > 5)) next
 
      if (length(unique(inputData[,i])) < 6 | all(is.factor(inputData[,i]))){
 
