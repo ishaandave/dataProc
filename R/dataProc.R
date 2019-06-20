@@ -1,8 +1,5 @@
-library(rt)
+library(truncnorm)
 dataProc = function (inputData, n, seed) {
-  # getting variable names and number of unique levels in each of them
-
-
 
 
   simData <- data.frame(matrix(nrow = n, ncol = ncol(inputData)))
@@ -59,6 +56,5 @@ dataProc = function (inputData, n, seed) {
 
   return(data.frame(simData))
 }
-
 
 
