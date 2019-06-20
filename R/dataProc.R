@@ -39,8 +39,6 @@ dataProc = function (inputData, n, seed) {
                                a = min(inputData[,i]), mean = mean(inputData[,i], na.rm = T), sd = sqrt(var(inputData[,i], na.rm = T)))
     }
 
-
-
      for (j in 1:nrow(inputData)) { # 3
     #
       if (is.na(inputData[j, i] )) {
