@@ -1,10 +1,13 @@
 library(truncnorm)
+library(lubridate)
+library(stringr)
+library(ggplot2)
+
 
 dataProc = function (inputData, n, seed) {
 
 
   simData <- data.frame(matrix(nrow = n, ncol = ncol(inputData)))
-  names(simData) <- paste0("var", c(1:ncol(inputData)))
 
 
   ## getting distribution of each variable and randomly sampling from that to get new dataset
@@ -14,18 +17,36 @@ dataProc = function (inputData, n, seed) {
   }
 
 
-
   for (i in 1:ncol(inputData))  { # (1)
 
-    if (all(is.na(inputData[,i])) |
+
+    datePattern = "([0-9][0-9][0-9][0-9])[-]([0-1][0-9])[-]([0-9][0-9])"
+
+
+    if (any(str_detect(as.character(inputData[,i]), datePattern))) {
+
+      dateFormatted = as.Date(as.character(inputData[,i]))
+
+
+      dates2 = sample(seq(min(dateFormatted, na.rm = T),
+                          max(dateFormatted, na.rm = T), by ="day"), n)
+      simData[,i] = dates2
+#
+      ggplot() + aes(x = format(dates2, "%Y-%m")) +
+        geom_bar() + labs(x = "Month")
+
+
+    }
+
+    else if (all(is.na(inputData[,i])) |
            (all(is.character(inputData[,i])) & length(unique(inputData[,i])) == nrow(inputData))) next
 
-     if (length(unique(inputData[,i])) < 6 | all(is.factor(inputData[,i]))){
+     else if (length(unique(inputData[,i])) < 6 | all(is.factor(inputData[,i]))) {
 
       simData[,i] = sample(c(as.character(as.data.frame(table(inputData[,i]))$Var1)), n, TRUE,
                            prob = c(as.data.frame(table(inputData[,i]))$Freq)
                           )
-      }
+     }
 
 
     else if (mean(inputData[,i] %% 1, na.rm = T) == 0) {
@@ -52,11 +73,15 @@ dataProc = function (inputData, n, seed) {
     #   }
      } # (2)
 
-    names(simData) = names(inputData)
+
 
   } #close big for loop (1)
+  names(simData) = names(inputData)
+  simData$fakeDates = dates2
+  simData$originalFormattedDates = dateFormatted[c(1:n)]
     View(simData)
 
   return(data.frame(simData))
 }
+
 
