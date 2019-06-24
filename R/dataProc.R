@@ -30,15 +30,15 @@ dataProc = function (inputData, n, seed) {
 
       dates2 = sample(seq(min(dateFormatted, na.rm = T),
                           max(dateFormatted, na.rm = T), by ="day"), n)
+
       simData[,i] = dates2
 #
       ggplot() + aes(x = format(dates2, "%Y-%m")) +
         geom_bar() + labs(x = "Month")
 
-
     }
 
-    else if (all(is.na(inputData[,i])) |
+      else if (all(is.na(inputData[,i])) |
            (all(is.character(inputData[,i])) & length(unique(inputData[,i])) == nrow(inputData))) next
 
      else if (length(unique(inputData[,i])) < 6 | all(is.factor(inputData[,i]))) {
@@ -77,9 +77,9 @@ dataProc = function (inputData, n, seed) {
 
   } #close big for loop (1)
   names(simData) = names(inputData)
-  simData$fakeDates = dates2
-  simData$originalFormattedDates = dateFormatted[c(1:n)]
-    View(simData)
+  # simData$fakeDates = dates2
+  # simData$originalFormattedDates = dateFormatted[c(1:n)]
+  #   View(simData)
 
   return(data.frame(simData))
 }
