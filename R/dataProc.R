@@ -2,7 +2,7 @@ library(truncnorm)
 library(lubridate)
 library(stringr)
 library(ggplot2)
-
+library(MASS)
 
 dataProc = function (inputData, n, seed) {
 
@@ -33,8 +33,7 @@ dataProc = function (inputData, n, seed) {
 
       simData[,i] = dates2
 #
-      ggplot() + aes(x = format(dates2, "%Y-%m")) +
-        geom_bar() + labs(x = "Month")
+
 
     }
 
@@ -68,15 +67,17 @@ dataProc = function (inputData, n, seed) {
         simData[c(which(is.na(inputData[,i]))), i] = NA
       }
     # #
-    #   else if (inputData[j, i]== "")  {
-    #     simData[c(which(inputData[,i]=="")), i] = ""
-    #   }
-     } # (2)
+      else if (inputData[j, i]== "")  {
+        simData[c(which(inputData[,i]=="")), i] = ""
+      }
+     }  (2)
 
 
 
   } #close big for loop (1)
   names(simData) = names(inputData)
+  ggplot() + aes(x = format(dates2, "%Y-%m")) +
+    geom_bar() + labs(x = "Month")
   # simData$fakeDates = dates2
   # simData$originalFormattedDates = dateFormatted[c(1:n)]
   #   View(simData)
