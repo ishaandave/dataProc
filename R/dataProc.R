@@ -86,12 +86,6 @@ dataProc = function (inputData, n, seed) {
 
   } ## Close for loop (2)
 
-        # ggplot() + aes(x = format(dates2, "%Y-%m")) +
-        # geom_bar() + labs(x = "Month")
-
-  # simData$fakeDates = dates2
-  # simData$originalFormattedDates = dateFormatted[c(1:n)]
-  #   View(simData)
    names(simData) = names(inputData)
    return(data.frame(simData))
 }
