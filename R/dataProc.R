@@ -5,6 +5,14 @@ library(ggplot2)
 library(MASS)
 library(dplyr)
 
+
+#' takes any dataset, checks format of each variable
+#' Based on distribution from original variable, randomly samples into a new dataset n times
+#'
+#' Returns distributionally similar dataset
+
+
+
 dataProc = function (inputData, n, seed) {
 
   simData = data.frame(matrix(nrow = n, ncol = ncol(inputData)))
