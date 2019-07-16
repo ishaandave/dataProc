@@ -2,7 +2,7 @@ atl = read.csv("/Users/ishaandave/Desktop/CDC-Leidos/Data/Atlas/AtlasPlusTableDa
 all = read.csv("/Users/ishaandave/Desktop/CDC-Leidos/Data/Atlas/AtlasPlusTableData-allstates2016.csv")
 
 
-
+# HELLO
 # atl$Cases = as.numeric(gsub(",", "", atl$Cases))
 
 #
