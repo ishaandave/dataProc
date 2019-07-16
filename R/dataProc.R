@@ -60,14 +60,26 @@ dataProc = function (inputData, n, seed) {
 
     } else if (any(na.omit(inputData[,i]) %% 1 == 0)) {
 
-          simData[,i] = round(rtruncnorm(n,
-                                     a = min(inputData[,i], na.rm = T), mean = mean(inputData[,i], na.rm = T),
-                                     sd = sd(inputData[,i], na.rm = T)))
+
+      fitNormal  <- fitdist(inputData[,i], "norm", method = "mme")
+      fitGamma   <- fitdist(inputData[,i], "gamma", method = "mme")
+      #fitLogNorm <- fitdist(abs(inputData[,i]), "lnorm", method = "mme")
+      #fitWeibull <- fitdist(inputData[,i], "weibull", method = c("mge"))
+
+
+      listFits = list(fitNormal, fitGamma)
+
+      fits = gofstat(list(fitNormal, fitGamma),fitnames=c("norm", "gamma"))
+
+      simData[,i] = round(eval(parse(text = paste0("r", names(which.min(fits$aic)), '(', 'n, ',
+                                   listFits[[which.min(fits$aic)[[1]]]][[1]][[1]], ', ',
+                                   listFits[[which.min(fits$aic)[[1]]]][[1]][[2]], ')'))))
+
     } else {
 
-          simData[,i] = rtruncnorm(n,
-                               a = min(inputData[,i], na.rm = T), mean = mean(inputData[,i], na.rm = T),
-                               sd = sd(inputData[,i], na.rm = T))
+      simData[,i] = eval(parse(text = paste0("r", names(which.min(fits$aic)), '(', 'n, ',
+                                   listfits[[which.min(fits$aic)[[1]]]][[1]][[1]], ', ',
+                                   listfits[[which.min(fits$aic)[[1]]]][[1]][[2]], ')')))
     }
 
   } #close big for loop (1)
