@@ -21,12 +21,6 @@ all = read.csv("/Users/ishaandave/Desktop/CDC-Leidos/Data/Atlas/AtlasPlusTableDa
 #
 
 
-
-
-
-
-
-
 all2 = all[all$Cases != "0" & !is.na(all$Age.Group) , ]
 
 
