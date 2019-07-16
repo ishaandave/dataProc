@@ -69,7 +69,7 @@ dataProc = function (inputData, n, seed) {
 
       listFits = list(fitNormal, fitGamma)
 
-      fits = gofstat(list(fitNormal, fitGamma),fitnames=c("norm", "gamma"))
+      fits = gofstat(list(fitNormal, fitGamma), fitnames=c("norm", "gamma"))
 
       simData[,i] = round(eval(parse(text = paste0("r", names(which.min(fits$aic)), '(', 'n, ',
                                    listFits[[which.min(fits$aic)[[1]]]][[1]][[1]], ', ',
