@@ -5,7 +5,7 @@ library(ggplot2)
 library(MASS)
 library(dplyr)
 
-## WhAT IS UP
+
 #' takes any dataset, checks format of each variable
 #' Based on distribution from original variable, randomly samples into a new dataset n times
 #'
