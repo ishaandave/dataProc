@@ -41,7 +41,7 @@ dataProc = function (inputData, n, seed) {
     # }
 
      if ((any(is.Date(as.Date(as.character(inputData[,i]), format = "%Y%m%d"))))
-                   & nchar(inputData[min(which(!is.na(inputData[,i]))),i]) == 8) {
+                   & nchar(inputData[min(which(!is.na(inputData[,i]))), i]) == 8) {
 
           dateFormatted2 = as.Date(as.character(inputData[,i]), format = "%Y%m%d")
 
