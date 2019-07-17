@@ -15,7 +15,7 @@ library(fitdistrplus)
 
 
 
-dataProc = function (inputData, n, seed) {
+dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
 
   simData = data.frame(matrix(nrow = n, ncol = ncol(inputData)))
 
@@ -40,10 +40,10 @@ dataProc = function (inputData, n, seed) {
     #
     # }
 
-     if ((any(is.Date(as.Date(as.character(inputData[,i]), format = "%Y%m%d"))))
+     if ((any(is.Date(as.Date(as.character(inputData[,i]), format = dateFormat))))
                    & nchar(inputData[min(which(!is.na(inputData[,i]))), i]) == 8) {
 
-          dateFormatted2 = as.Date(as.character(inputData[,i]), format = "%Y%m%d")
+          dateFormatted2 = as.Date(as.character(inputData[,i]), format = dateFormat)
 
           dates3 = sample(seq(min(dateFormatted2, na.rm = T),
                           max(dateFormatted2, na.rm = T), by ="day"), n)
