@@ -43,10 +43,13 @@ dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
      if (any(sapply(inputData, function(x) !all(is.na(as.Date(as.character(x), format= dateFormat)))))) {
                    # & nchar(inputData[min(which(!is.na(inputData[,i]))), i]) == 8) {
 
-          dateFormatted2 = as.Date(as.character(inputData[, which(sapply(inputData,
-                                                                        function(x)
-                                                                        !all(is.na(as.Date(as.character(x),
-                                                                        format="%m/%d/%Y")))))[[1]]]), format = dateFormat)
+          possibleDates = which(sapply(inputData,
+                                       function(x)
+                                         !all(is.na(as.Date(as.character(x),
+                                                            format="%m/%d/%Y")))))
+
+          dateFormatted2 = as.Date(as.character(inputData[, as.numeric(c(unname(possibleDates)))],
+                                                format = dateFormat)
 
           dates3 = sample(seq(min(dateFormatted2, na.rm = T),
                           max(dateFormatted2, na.rm = T), by ="day"), n)
