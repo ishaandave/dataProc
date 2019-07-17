@@ -4,6 +4,8 @@ library(stringr)
 library(ggplot2)
 library(MASS)
 library(dplyr)
+library(fitdistrplus)
+
 
 
 #' takes any dataset, checks format of each variable
