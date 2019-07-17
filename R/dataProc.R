@@ -46,7 +46,7 @@ dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
           dateFormatted2 = as.Date(as.character(inputData[, which(sapply(inputData,
                                                                         function(x)
                                                                         !all(is.na(as.Date(as.character(x),
-                                                                        format="%m/%d/%Y")))))]), format = dateFormat)
+                                                                        format="%m/%d/%Y")))))[[1]]]), format = dateFormat)
 
           dates3 = sample(seq(min(dateFormatted2, na.rm = T),
                           max(dateFormatted2, na.rm = T), by ="day"), n)
@@ -83,8 +83,8 @@ dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
     } else {
 
       simData[,i] = eval(parse(text = paste0("r", names(which.min(fits$aic)), '(', 'n, ',
-                                   listfits[[which.min(fits$aic)[[1]]]][[1]][[1]], ', ',
-                                   listfits[[which.min(fits$aic)[[1]]]][[1]][[2]], ')')))
+                                   listFits[[which.min(fits$aic)[[1]]]][[1]][[1]], ', ',
+                                   listFits[[which.min(fits$aic)[[1]]]][[1]][[2]], ')')))
     }
 
   } #close big for loop (1)
