@@ -9,7 +9,20 @@ wcgs = wcgs[1560:1620,]
 
 corrVars = data.frame(read_xlsx("C:/Users/yhd8/Desktop/Data/Pretend/listVars.xlsx"))
 
+
+
 newdat =  data.frame(read.csv("C:/Users/yhd8/Desktop/Data/Pretend/Demo_outbreak_NodeList.csv"))
+newdat$subtype[50:86] = factor(2)
+newdat$subtype = sample(c("c", "b"), replace = T, prob = c(.5, .5) )
+newdat$cluster[30:60] = 1
+
+
+
+
+
+
+
+
 
 dates = as.data.frame(c(20141212,
  20160228,
