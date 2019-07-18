@@ -50,16 +50,17 @@ bivariateDistsList = function(indat, listVars, n) {
 
 
     predProbMat2 = cbind(predProbMat, unique(samp$V1))
-    names(predProbMat2) = c(paste0("pred", c(levels(samp$V2))), listVars[1,1])
+    names(predProbMat2) = c(paste0("pred", c(levels(samp$V2))), listVars[i,1])
     predProbMat3 = predProbMat2[order(predProbMat2[,ncol(predProbMat2)]),]
 
     observedAndPredicted = cbind(probmat, predProbMat3)
     observedAndPredicted[is.na(observedAndPredicted)] <- 0
+
    print(observedAndPredicted)
 
   }
 
-
+  return(observedAndPredicted)
 }
 
 
@@ -73,7 +74,7 @@ bivariateDistsList = function(indat, listVars, n) {
 
 
 
-
+########## SCRATCH WORK ###########################
 
 
 
@@ -89,7 +90,7 @@ trueProbs = prop.table(table(c1, c2))
 probmat = as.data.frame.matrix(prop.table(table(c1, c2)))
 # rownames(probmat) = unique(all2$Geography)
 # probmat2 = cbind(unique(all2$Geography), probmat)
-names(probmat) = paste0("true", c(levels(samp$behpat)))
+names(probmat) = paste0("true", c(unique(c[,2])))
 
 
 
@@ -107,7 +108,7 @@ nSamp  <- 500000
 samp   <- as.data.frame(events[sample.int(n1*n2, nSamp, prob=probs, replace=TRUE),])
 head(samp)
 
-predProbs = prop.table(table(samp$arcus, samp$behpat))
+predProbs = prop.table(table(samp$v1, samp$v2))
 predProbMat = as.data.frame(matrix(predProbs, ncol = nlevels(c[,2])))
 names(predProbMat) = paste0("pred", c(levels(samp$v2)))
 rownames(predProbMat) = c(c1Sorted)
