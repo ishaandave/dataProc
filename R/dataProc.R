@@ -46,7 +46,7 @@ dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
           possibleDates = which(sapply(inputData,
                                        function(x)
                                          !all(is.na(as.Date(as.character(x),
-                                                            format="%m/%d/%Y")))))
+                                         format="%m/%d/%Y")))))
 
           dateFormatted2 = as.Date(as.character(inputData[, as.numeric(c(unname(possibleDates)))],
                                                 format = dateFormat)
