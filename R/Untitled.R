@@ -4,6 +4,11 @@ dat2 = dat[c(1:20),]
 dat2[dat2 == ""] <- NA
 
 
+wcgs = data.frame(read_xls("C:/Users/yhd8/Desktop/Data/Pretend/wcgs.xls"))
+wcgs = wcgs[1560:1620,]
+
+corrVars = data.frame(read_xlsx("C:/Users/yhd8/Desktop/Data/Pretend/listVars.xlsx"))
+
 newdat =  data.frame(read.csv("C:/Users/yhd8/Desktop/Data/Pretend/Demo_outbreak_NodeList.csv"))
 
 dates = as.data.frame(c(20141212,
