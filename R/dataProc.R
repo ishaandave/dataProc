@@ -49,7 +49,7 @@ dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
                                          format="%m/%d/%Y")))))
 
           dateFormatted2 = as.Date(as.character(inputData[, as.numeric(c(unname(possibleDates)))],
-                                                format = dateFormat)
+                                                format = dateFormat))
 
           dates3 = sample(seq(min(dateFormatted2, na.rm = T),
                           max(dateFormatted2, na.rm = T), by ="day"), n)
@@ -59,6 +59,11 @@ dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
 
       } else if (all(is.na(inputData[,i])) |
            (all(is.character(inputData[,i])) & length(unique(inputData[,i])) == nrow(inputData))) next
+
+            ### RETURNS NA's
+
+
+
 
       else if (length(unique(inputData[,i])) < 6 | all(is.factor(inputData[,i]))) {
 
@@ -108,4 +113,6 @@ dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
 
    names(simData) = names(inputData)
    return(data.frame(simData))
+
 }
+

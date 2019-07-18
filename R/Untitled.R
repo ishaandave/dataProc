@@ -1,7 +1,10 @@
-
-dat = data.frame(read_xls("/Users/ishaandave/Desktop/SASUniversityEdition/myfolders/sasuser.v94/BIOS 8010/wcgs.xls"))
+library(readxl)
+dat = data.frame(read.csv("C:/Users/yhd8/Desktop/Data/Pretend/listings.csv", na.strings = ""))
 dat2 = dat[c(1:20),]
-123
+dat2[dat2 == ""] <- NA
+
+
+newdat =  data.frame(read.csv("C:/Users/yhd8/Desktop/Data/Pretend/Demo_outbreak_NodeList.csv"))
 
 dates = as.data.frame(c(20141212,
  20160228,
