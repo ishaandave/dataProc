@@ -44,6 +44,12 @@ names(try)[ncol(try)] = "dates"
 
 something = as.data.frame(cbind(try$arcus, try$chd69, try$smoke, try$typchd69))
 
+a <- c(1,2,3,4)
+b <- c("kk","km","ll","k3")
+time <- c(2001,2001,2002,2003)
+df <- data.frame(a,b,time)
+myvalues <- c(2001,2002,2003)
 
-a = try %>%
-  select_if
+for (i in 1:3) {
+  assign(paste0("y",i), df[df$time==myvalues[i],])
+}
