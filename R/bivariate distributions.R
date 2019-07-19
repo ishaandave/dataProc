@@ -76,6 +76,10 @@ latLong = data.frame(state = (state.name),
 new = aggregate(Cases ~ state, latLong, sum)
 
 
+rates = merge(new, totals, by = "state")
+rates$rate = 100*rates$Cases / rates$x
+
+allhhs = merge(rates, hhsRegions, by = "region")
 
 
 
@@ -123,7 +127,7 @@ new = aggregate(Cases ~ state, latLong, sum)
   ##################################################################################
   ##################################################################################
 
-  ########################## USE THIS CODE FOR MAP OMG #############################
+  ########################## USE THIS CODE FOR MAP ALL STATES#######################
 
   ##################################################################################
   ##################################################################################
@@ -132,16 +136,19 @@ new = aggregate(Cases ~ state, latLong, sum)
 
   library(maps)
   library(ggthemes)
-  names(new)[1] = "region"
-  new$region = tolower(new$region)
-  states_map <- map_data("state", region = new$region)
-  new_map <- merge(states_map, new, by = "region")
+  names(rates)[1] = "region"
+  new$region = tolower(rates$region)
+  states_map <- map_data("state", region = rates$region)
+  new_map <- merge(states_map, rates, by = "region")
   newHHS = merge(new_map, hhsRegions, by = "region"  )
   new_map <- arrange(new_map, group, order) # to sort polygons in right order
 
-  ggplot(new_map, aes(x = long, y = lat, group = group, fill = Cases)) +
+  ggplot(new_map, aes(x = long, y = lat, group = group, fill = rate)) +
     geom_polygon(color = "black") +
-    coord_map("polyconic") + theme_tufte() + labs(x = "", y = "")
+    coord_map("polyconic") + theme_tufte() + labs(x = "", y = "") +
+    scale_fill_gradient2(low = "red", mid = "white",
+                         high = "blue", midpoint = 0, space = "Lab",
+                         na.value = "grey50", guide = "colourbar", aesthetics = "fill")
 
 
 
