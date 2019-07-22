@@ -47,6 +47,8 @@ library(dplyr)
 us_state_map = map_data("state")
 
 
+HIVdists = function (race) {
+
 #load us state map data
 us_state_map = map_data("state");
 
@@ -60,7 +62,7 @@ all2$state = tolower(all2$state)
 us_state_map = us_state_map[, -c(3, 4, 6)]
 f = merge(all2, hhsRegions, by = "state", all.x = T)
 names(f)[1] = "state"
-latLong = data.frame(state = (state.name),
+latLong = data.frame(state = as.character(state.name),
                      long = state.center$x,
                      lat = state.center$y) %>%
  right_join(f, by = "state")
@@ -99,7 +101,7 @@ map
 
 
 
-
+}
 
 
 
