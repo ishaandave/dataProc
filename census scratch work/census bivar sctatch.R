@@ -1,4 +1,4 @@
-  
+
 ### Takes census data and allows you to map racial distributions across the US (according to HHS boundaries)
 ### Will allow user to make a map whatever race/ethnicity they want to input
 
