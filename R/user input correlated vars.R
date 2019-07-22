@@ -1,3 +1,5 @@
+library(readxl)
+
 wcgs = data.frame(read_xls("C:/Users/yhd8/Desktop/Data/Pretend/wcgs.xls"))
 wcgs = wcgs[1560:1620,]
 
@@ -76,7 +78,9 @@ bivariateDistsList = function(indat, listVars, n) {
 
 
 
-########## SCRATCH WORK ###########################
+########## SCRATCH WORK #########################
+### This code is really just used to form the function above ##
+## You  can manually pick what variables you want to
 
 
 
@@ -85,8 +89,8 @@ bivariateDistsList = function(indat, listVars, n) {
 
 
 
-c1 = wcgs$smoke
-c2 = wcgs$agec
+c1 = expand$Transmission.Category
+c2 = expand$Age.Group
 c = cbind.data.frame(c1, c2)
 trueProbs = prop.table(table(c1, c2))
 probmat = as.data.frame.matrix(prop.table(table(c1, c2)))
@@ -125,10 +129,10 @@ observedAndPredicted = cbind(probmat, predProbMat3)
 observedAndPredicted[is.na(observedAndPredicted)] <- 0
 
 true = observedAndPredicted %>%
-  select(select_vars(names(observedAndPredicted), starts_with('true', ignore.case = TRUE)))
+  select(tidyselect::vars_select(names(observedAndPredicted), starts_with('true', ignore.case = TRUE)))
 
 expected = observedAndPredicted %>%
-  select(select_vars(names(observedAndPredicted), starts_with('pred', ignore.case = TRUE)))
+  select(tidyselect::vars_select(names(observedAndPredicted), starts_with('pred', ignore.case = TRUE)))
 
 listTrue = c(as.matrix(true))
 listExpected = c(as.matrix(expected))
