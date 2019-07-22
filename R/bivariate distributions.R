@@ -1,7 +1,7 @@
 # atl = read.csv("/Users/ishaandave/Desktop/CDC-Leidos/Data/Atlas/AtlasPlusTableData-nygafl16.csv")
 all = (read.csv("C:/Users/yhd8/Desktop/Data/Atlas/AtlasPlusTableData-allstates2016.csv", stringsAsFactors=FALSE))
 names(all)[1] = "state"
-all$Cases = as.numeric(all$Cases)
+all$Cases = as.numeric(gsub(",","", all$Cases))
 
 
 hhsRegions = readxl::read_xlsx("C:/Users/yhd8/Desktop/Data/Atlas/HHS Regions.xlsx")
@@ -25,14 +25,12 @@ names(hhsRegions) = c("region", "division")
 #
 
 # allState = aggregate(all$Cases, by = list(all$Geography), FUN =  sum)
-all2 = all[all$Cases != "0" & !is.na(all$Age.Group) , ]
+all2 = all[all$Cases != "0" & !is.na(all$Age.Group) & !is.na(all$Cases) , ]
 
+all2$stateAbb =  state.abb[match(as.character(all2$state),state.name)]
+all2$division = hhs$division[match(toupper(all2$state), toupper(hhs$region))]
 
-all2$Cases = as.numeric(gsub(",","", all2$Cases))
-all3 = all2[!is.na(all2$Cases),]
-all3$stateAbb =  state.abb[match(as.character(all3$state),state.name)]
-
-# expand <- all3[rep(row.names(all3), all3$Cases), 1:4]
+ # expand <- all3[rep(row.names(all3), all3$Cases), 1:4]
 
 
 # fun = aggregate(expand, by = list(expand$Geography, expand$Race.Ethnicity), FUN = length, drop = T)
@@ -44,7 +42,7 @@ all3$stateAbb =  state.abb[match(as.character(all3$state),state.name)]
 library(ggplot2)
 library(dplyr)
 
-us_state_map = map_data("state");
+us_state_map = map_data("state")
 
 #map each state to a division
 us_state_map$division[us_state_map$region %in% c("connecticut", "maine", "massachusetts", "new hampshire", "rhode island", "vermont")] <- 1
