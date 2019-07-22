@@ -61,8 +61,11 @@ all2$state = tolower(all2$state)
 
 us_state_map = us_state_map[, -c(3, 4, 6)]
 f = merge(all2, hhsRegions, by = "state", all.x = T)
+
 names(f)[1] = "state"
+
 f$state = as.character(f$state)
+
 latLong = data.frame(state = as.character(state.name),
                      long = state.center$x,
                      lat = state.center$y) %>%
@@ -79,19 +82,20 @@ male = paste0(toupper(race), "_MALE")
 
 census2[, paste0("TOT_", toupper(race))] = census2[, female] + census2[, male]
 totals = aggregate(census2[,c("TOT_POP",  paste0("TOT_", toupper(race)))], by = list(census2$state), sum)
-names(totals)[1] = "state"
-totals$state = tolower(totals$state)
-names(totals) = c("state", "totpop", paste0("n", race))
+  names(totals)[1] = "state"
+  totals$state = tolower(totals$state)
+    names(totals) = c("state", "totpop", paste0("n", race))
 
 rates = merge(new, totals, by = "state")
-rates$rate = rates$Cases / rates[, paste0("n", race)]
+  rates$rate = rates$Cases / rates[, paste0("n", race)]
 
 allhhs = merge(rates, hhsRegions, by = "state")
 
 
 aggDivision = aggregate(allhhs[, c("totpop", paste0("n", race), "Cases")], by = list(allhhs$division), sum)
-aggDivision[, paste0("rateAmong", toupper(race))] = aggDivision[, "Cases"] / aggDivision[, paste0("n", race)]
-names(aggDivision)[1] = "division"
+  aggDivision[, paste0("rateAmong", toupper(race))] = aggDivision[, "Cases"] / aggDivision[, paste0("n", race)]
+  names(aggDivision)[1] = "division"
+
 us_state_map.mod$rate = aggDivision[, paste0("rateAmong", toupper(race))][match(us_state_map.mod$division, aggDivision$division)]
 
 map <- ggplot()
