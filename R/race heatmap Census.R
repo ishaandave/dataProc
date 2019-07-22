@@ -30,6 +30,10 @@ library(ggplot2)
 
 raceDistribution = function (race) {
 
+  if (!is.character(race)) {
+    print("INPUT MUST BE CHARACTER VALUE")
+  }
+
   us_state_map = map_data("state");
 
 
@@ -40,6 +44,7 @@ raceDistribution = function (race) {
   us_state_map.mod = arrange(us_state_map.mod, division, order)
   us_state_map.mod$division = as.numeric(as.character((us_state_map.mod$division)))
 
+  race = as.character(race)
   female = paste0(toupper(race), "_FEMALE")
   male = paste0(toupper(race), "_MALE")
 
@@ -61,6 +66,7 @@ raceDistribution = function (race) {
   map <- ggplot()
   map = map + geom_polygon(data=us_state_map.mod, aes(x=long, y=lat, group=group, fill = rate))
   map = map + scale_fill_gradient(low = "thistle2", high = "darkred")
+  map = map + ggtitle(paste0("Distribution of ", toupper(race), " Across America"))
   map
 
 }
