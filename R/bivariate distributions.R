@@ -3,9 +3,10 @@ all = (read.csv("C:/Users/yhd8/Desktop/Data/Atlas/AtlasPlusTableData-allstates20
 names(all)[1] = "state"
 all$Cases = as.numeric(gsub(",","", all$Cases))
 
-
 hhsRegions = readxl::read_xlsx("C:/Users/yhd8/Desktop/Data/Atlas/HHS Regions.xlsx")
-names(hhsRegions) = c("region", "division")
+names(hhsRegions) = c("state", "division")
+hhsRegions$state = tolower(hhsRegions$state)
+
 
 # atl$Cases = as.numeric(gsub(",", "", atl$Cases))
 
@@ -28,9 +29,9 @@ names(hhsRegions) = c("region", "division")
 all2 = all[all$Cases != "0" & !is.na(all$Age.Group) & !is.na(all$Cases) , ]
 
 all2$stateAbb =  state.abb[match(as.character(all2$state),state.name)]
-all2$division = hhs$division[match(toupper(all2$state), toupper(hhs$region))]
+all2$division = hhsRegions$division[match(toupper(all2$state), toupper(hhsRegions$state))]
 
- # expand <- all3[rep(row.names(all3), all3$Cases), 1:4]
+ expand <- all2[rep(row.names(all2), all2$Cases), c(1:4,7)]
 
 
 # fun = aggregate(expand, by = list(expand$Geography, expand$Race.Ethnicity), FUN = length, drop = T)
@@ -41,29 +42,23 @@ all2$division = hhs$division[match(toupper(all2$state), toupper(hhs$region))]
 
 library(ggplot2)
 library(dplyr)
+ library(plyr)
 
 us_state_map = map_data("state")
 
+
+#load us state map data
+us_state_map = map_data("state");
+
+us_state_map.mod = merge(us_state_map, hhsRegions, by.x = "region", by.y = "state")
+us_state_map.mod = arrange(us_state_map.mod, division, order)
+us_state_map.mod$division = as.numeric(as.character((us_state_map.mod$division)))
+
 #map each state to a division
-us_state_map$division[us_state_map$region %in% c("connecticut", "maine", "massachusetts", "new hampshire", "rhode island", "vermont")] <- 1
-us_state_map$division[us_state_map$region %in% c("new jersey","new york","puerto rico","virgin islands")] <- 2
-us_state_map$division[us_state_map$region %in% c("delaware","district of columbia","maryland","pennsylvania","virginia","west virginia")] <- 3
-us_state_map$division[us_state_map$region %in% c("alabama","florida","georgia","kentucky","mississippi","north carolina","south carolina","tennessee")] <- 4
-us_state_map$division[us_state_map$region %in% c("illinois","indiana","michigan","minnesota","ohio","wisconsin")] <- 5
-us_state_map$division[us_state_map$region %in% c("arkansas","louisiana","new mexico","oklahoma","texas")] <- 6
-us_state_map$division[us_state_map$region %in% c("iowa","kansas","missouri","nebraska")] <- 7
-us_state_map$division[us_state_map$region %in% c("colorado","montana","north dakota","south dakota","utah","wyoming")] <- 8
-us_state_map$division[us_state_map$region %in% c("arizona","california","hawaii","nevada")] <- 9
-us_state_map$division[us_state_map$region %in% c("alaska","idaho","oregon","washington")] <- 10
+all2$state = tolower(all2$state)
 
-#create a dummy variable that counts the number of states in each division
-divisions.subtotal <- ddply(us_state_map, .(division), summarize, NumberOfStates=length(unique(region)))
-
-all3$state = tolower(all3$state)
-hhsRegions$region = tolower(hhsRegions$region)
-names(hhsRegions)[1] = "state"
 us_state_map = us_state_map[, -c(3, 4, 6)]
-f = merge(all3, hhsRegions, by = "state", all.x = T)
+f = merge(all2, hhsRegions, by = "state", all.x = T)
 names(f)[1] = "state"
 latLong = data.frame(state = (state.name),
                      long = state.center$x,
@@ -71,16 +66,36 @@ latLong = data.frame(state = (state.name),
  right_join(f, by = "state")
 
 
-new = aggregate(Cases ~ state, latLong, sum)
 
+new = aggregate(Cases ~ state, latLong, sum)
+new$state = tolower(new$state)
+
+race = as.character(race)
+female = paste0(toupper(race), "_FEMALE")
+male = paste0(toupper(race), "_MALE")
+
+census2[, paste0("TOT_", toupper(race))] = census2[, female] + census2[, male]
+totals = aggregate(census2[,c("TOT_POP",  paste0("TOT_", toupper(race)))], by = list(census2$state), sum)
+names(totals)[1] = "state"
+totals$state = tolower(totals$state)
+names(totals) = c("state", "totpop", paste0("n", race))
 
 rates = merge(new, totals, by = "state")
-rates$rate = 100*rates$Cases / rates$x
+rates$rate = rates$Cases / rates[, paste0("n", race)]
 
-allhhs = merge(rates, hhsRegions, by = "region")
+allhhs = merge(rates, hhsRegions, by = "state")
 
 
+aggDivision = aggregate(allhhs[, c("totpop", paste0("n", race), "Cases")], by = list(allhhs$division), sum)
+aggDivision[, paste0("rateAmong", toupper(race))] = aggDivision[, "Cases"] / aggDivision[, paste0("n", race)]
+names(aggDivision)[1] = "division"
+us_state_map.mod$rate = aggDivision[, paste0("rateAmong", toupper(race))][match(us_state_map.mod$division, aggDivision$division)]
 
+map <- ggplot()
+map = map + geom_polygon(data=us_state_map.mod, aes(x=long, y=lat, group=group, fill = rate))
+map = map + scale_fill_gradient(low = "thistle2", high = "darkred")
+map = map + ggtitle(paste0("Distribution of ", toupper(race), " Across America"))
+map
 
 
 
