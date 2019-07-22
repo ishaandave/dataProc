@@ -60,7 +60,7 @@ raceDistribution = function (race) {
 
   map <- ggplot()
   map = map + geom_polygon(data=us_state_map.mod, aes(x=long, y=lat, group=group, fill = rate))
-  map = map + scale_fill_gradient(low = "lightgray", high = "darkblue")
+  map = map + scale_fill_gradient(low = "thistle2", high = "darkred")
   map
 
 }
@@ -73,8 +73,9 @@ raceDistribution = function (race) {
 
 
 
+######################################################################################
 # SCRATCH WORK TO MAKE SURE ABOVE FUNCTION WORKS IF WE JUST INPUT THE VARIABLE NAME
-
+######################################################################################
 
 library(ggplot2)
 library(maps)
