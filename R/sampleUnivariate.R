@@ -1,10 +1,3 @@
-library(truncnorm)
-library(lubridate)
-library(stringr)
-library(ggplot2)
-library(MASS)
-library(dplyr)
-library(fitdistrplus)
 
 #' Univariate sampling of variables through a dataset
 #'
