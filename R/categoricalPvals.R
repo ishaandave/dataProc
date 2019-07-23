@@ -6,7 +6,7 @@
 #'
 #' @param inputData "true" dataset that you want to sample from
 #'
-#' @return associations p-values for each pair of categorical variables
+#' @return associations and p-values for each pair of categorical variables
 #'
 #' @export
 #'

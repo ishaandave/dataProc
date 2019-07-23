@@ -7,7 +7,7 @@
 continuousPvals(inputData)
 }
 \arguments{
-\item{inputData}{dataset that you want to sample from}
+\item{inputData}{"true" dataset that you want to sample from}
 }
 \value{
 correlations p-values for each pair of continuous variables

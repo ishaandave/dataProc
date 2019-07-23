@@ -7,14 +7,14 @@
 sampleBivariate(inputData, n, listVars, dateFormat = "\%Y\%m\%d")
 }
 \arguments{
-\item{inputData}{dataset that you want to sample from}
+\item{inputData}{"true" dataset that you want to sample from}
 
 \item{n}{number of rows in output/simulated dataset}
 
-\item{listVars}{dataframe of variable pairs that are associated}
+\item{listVars}{dataframe of variable pairs that are or might be associated}
 }
 \value{
-simData -- distributionally similar to input dataset
+simData -- a dataset with n rows that is distributionally similar to input dataset
 }
 \description{
 Bivariate Sampling of variables throughout a dataset

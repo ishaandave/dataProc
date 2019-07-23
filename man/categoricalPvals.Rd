@@ -7,7 +7,7 @@
 categoricalPvals(inputData)
 }
 \arguments{
-\item{inputData}{dataset that you want to sample from}
+\item{inputData}{"true" dataset that you want to sample from}
 }
 \value{
 associations p-values for each pair of categorical variables

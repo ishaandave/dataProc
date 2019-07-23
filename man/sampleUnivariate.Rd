@@ -7,14 +7,14 @@
 sampleUnivariate(inputData, n, dateFormat = "\%Y\%m\%d")
 }
 \arguments{
-\item{inputData}{dataset that you want to sample from}
+\item{inputData}{"true" dataset that you want to sample from}
 
 \item{n}{number of rows in output/simulated dataset}
 
-\item{dateFormat}{if date variable exists in dataset, it's the format the date must be read in}
+\item{dateFormat}{format of the date variable (if one exists) in the original dataset}
 }
 \value{
-simData -- distributionally similar to input dataset
+simData -- a dataset with n rows that is distributionally similar to input dataset
 }
 \description{
 Takes any dataset, checks format of each variable
