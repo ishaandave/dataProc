@@ -4,6 +4,7 @@
 #' @param inputData dataset that you want to sample from
 #'
 #' @return list of all pairs of categorical variables that may or may not be associated
+#'
 #' @export
 #'
 #' @examples

@@ -5,7 +5,8 @@
 #' @param inputData dataset that you want to sample from
 #'
 #' @return list of all pairs of continuous variables that may be correlated
-#' @export
+#'
+#'  @export
 #'
 #' @examples
 #' pairsContVars()

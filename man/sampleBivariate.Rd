@@ -2,16 +2,24 @@
 % Please edit documentation in R/sampleBivariate.R
 \name{sampleBivariate}
 \alias{sampleBivariate}
-\title{Title}
+\title{Bivariate Sampling of variables throughout a dataset}
 \usage{
 sampleBivariate(inputData, n, listVars, dateFormat = "\%Y\%m\%d")
 }
 \arguments{
-\item{n}{}
+\item{inputData}{dataset that you want to sample from}
+
+\item{n}{number of rows in output/simulated dataset}
+
+\item{listVars}{dataframe of variable pairs that are associated}
+}
+\value{
+simData -- distributionally similar to input dataset
 }
 \description{
-Title
+Bivariate Sampling of variables throughout a dataset
 }
 \examples{
+sampleBivariate()
 
 }

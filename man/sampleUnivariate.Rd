@@ -2,11 +2,27 @@
 % Please edit documentation in R/sampleUnivariate.R
 \name{sampleUnivariate}
 \alias{sampleUnivariate}
-\title{takes any dataset, checks format of each variable
-Based on distribution from original variable, randomly samples into a new dataset n times}
+\title{Univariate sampling of variables through a dataset}
 \usage{
-sampleUnivariate(inputData, n, seed = 1, dateFormat = "\%Y\%m\%d")
+sampleUnivariate(inputData, n, dateFormat = "\%Y\%m\%d")
+}
+\arguments{
+\item{inputData}{dataset that you want to sample from}
+
+\item{n}{number of rows in output/simulated dataset}
+
+\item{dateFormat}{if date variable exists in dataset, it's the format the date must be read in}
+}
+\value{
+simData -- distributionally similar to input dataset
 }
 \description{
+Takes any dataset, checks format of each variable
+Based on distribution from original variable, randomly samples into a new dataset n times
+}
+\details{
 Returns distributionally similar dataset
+}
+\examples{
+sampleUnivariate()
 }

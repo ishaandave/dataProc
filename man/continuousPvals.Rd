@@ -2,10 +2,20 @@
 % Please edit documentation in R/continuousPvals.R
 \name{continuousPvals}
 \alias{continuousPvals}
-\title{function gives correlations and p values of all pairwise comparisons of continuous variables}
+\title{Correlations between each pair of continuous variables}
 \usage{
-continuousPvals(indat)
+continuousPvals(inputData)
+}
+\arguments{
+\item{inputData}{dataset that you want to sample from}
+}
+\value{
+correlations p-values for each pair of continuous variables
 }
 \description{
-user can input any dataset, and this will return only associations between continuous variables
+This gives correlations and p values of all pairwise comparisons of continuous variables
+User can input any dataset, and this will return only associations between continuous variables
+}
+\examples{
+continuousPvals()
 }

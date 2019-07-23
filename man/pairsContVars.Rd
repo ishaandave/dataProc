@@ -2,10 +2,23 @@
 % Please edit documentation in R/pairsContVars.R
 \name{pairsContVars}
 \alias{pairsContVars}
-\title{returns list of all possible pairwise continuous variables}
+\title{Pairs of all continuous variables that may be associated}
 \usage{
-pairsContVars(indat)
+pairsContVars(inputData)
+}
+\arguments{
+\item{inputData}{dataset that you want to sample from}
+}
+\value{
+list of all pairs of continuous variables that may be correlated
+
+ @export
 }
 \description{
-returns list of all possible pairwise continuous variables
+Pairs of all continuous variables that may be associated
+}
+\examples{
+pairsContVars()
+
+
 }

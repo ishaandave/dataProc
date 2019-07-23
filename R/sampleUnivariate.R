@@ -19,6 +19,10 @@ library(fitdistrplus)
 #'
 #' @return simData -- distributionally similar to input dataset
 #'
+#'
+#' @export
+#'
+#'
 #' @examples
 #' sampleUnivariate()
 

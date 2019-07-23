@@ -7,6 +7,7 @@
 #'
 #' @return associations p-values for each pair of categorical variables
 #'
+#' @export
 #'
 #' @examples
 #' categoricalPvals()
