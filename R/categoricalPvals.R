@@ -1,6 +1,12 @@
-#' function gives chi-square and p values of all pairwise comparisons of categorical variables
+#' Associations between each pair of categorical variables
 #'
-#' user can input any dataset, and this will return only associations between categorical vars/factors
+#' This gives associations (\Chi^2 values) and p values of all pairwise comparisons of categorical variables
+#' User can input any dataset, and this will return only associations between categorical variables
+#'
+#' @param inputData
+#'
+#' @return associations p-values for each pair of categorical variables
+
 
 categoricalPvals = function (indat) {
 
