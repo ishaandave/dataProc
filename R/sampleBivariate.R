@@ -2,11 +2,11 @@
 
 #' Bivariate Sampling of variables throughout a dataset
 #'
-#' @param inputData "true" dataset that you want to sample from
+#' @param inputData dataset that you want to sample from
 #' @param listVars dataframe of variable pairs that are or might be associated
 #' @param n number of rows in output/simulated dataset
 #'
-#' @return  simData -- a dataset with n rows that is distributionally similar to input dataset
+#' @return  A dataset with n rows that is distributionally similar to input dataset
 #' @export
 #'
 #' @examples

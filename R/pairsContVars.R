@@ -2,7 +2,7 @@
 
 #' Pairs of all continuous variables that may be associated
 #'
-#' @param inputData dataset that you want investigate
+#' @param inputData Dataset that you want investigate
 #'
 #' @return list of all pairs of continuous variables that may be correlated
 #'

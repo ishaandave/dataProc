@@ -1,16 +1,16 @@
 
 #' Univariate sampling of variables through a dataset
 #'
-#' Takes any dataset, checks format of each variable
-#' Based on distribution from original variable, randomly samples into a new dataset n times
+#' Takes any dataset, checks format of each variable and based on distributions of the original variables
+#' randomly samples into a new dataset n times.
 #'
-#' Returns distributionally similar dataset
+#' Returns distributionally similar dataset with user-specified number of rows
 #'
-#' @param inputData "true" dataset that you want to sample from
+#' @param inputData dataset that you want to sample from
 #' @param n number of rows in output/simulated dataset
-#' @param dateFormat format of the date variable (if one exists) in the original dataset
+#' @param dateFormat format of the date variable (if one exists) in the original dataset. Default is "YYYYMMDD."
 #'
-#' @return simData -- a dataset with n rows that is distributionally similar to input dataset
+#' @return A dataset with n rows that is distributionally similar to input dataset.
 #'
 #'
 #' @export
