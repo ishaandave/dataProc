@@ -6,7 +6,10 @@
 #' @param inputData dataset that you want to sample from
 #'
 #' @return associations p-values for each pair of categorical variables
-
+#'
+#'
+#' @examples
+#' categoricalPvals()
 
 categoricalPvals = function (indat) {
 
