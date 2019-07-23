@@ -1,7 +1,7 @@
 # roxygenize it
 
 
-#' Title
+#' Bivariate Sampling of variables throughout a dataset
 #'
 #' @param inputData dataset that you want to sample from
 #' @param listVars dataframe of variable pairs that are associated
