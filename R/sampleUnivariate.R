@@ -6,15 +6,22 @@ library(MASS)
 library(dplyr)
 library(fitdistrplus)
 
-
-#' takes any dataset, checks format of each variable
+#' Univariate sampling of variables through a dataset
+#'
+#' Takes any dataset, checks format of each variable
 #' Based on distribution from original variable, randomly samples into a new dataset n times
 #'
 #' Returns distributionally similar dataset
+#'
+#' @param inputData dataset that you want to sample from
+#' @param n number of rows in output/simulated dataset
+#' @param dateFormat if date variable exists in dataset, it's the format the date must be read in
+#'
+#' @return simData -- distributionally similar to input dataset
+#'
 
 
-
-sampleUnivariate = function (inputData, n, seed = 1, dateFormat = "%Y%m%d") {
+sampleUnivariate = function (inputData, n, dateFormat = "%Y%m%d") {
 
   simData = data.frame(matrix(nrow = n, ncol = ncol(inputData)))
 
