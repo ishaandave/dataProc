@@ -78,12 +78,12 @@ sampleUnivariate = function (inputData, n, dateFormat = "%Y%m%d") {
       fitNormal  <- fitdist(inputData[,i], "norm", method = "mme")
       fitGamma   <- fitdist(inputData[,i], "gamma", method = "mme")
       # fitLogNorm <- fitdist(abs(inputData[,i]), "lnorm", method = "mme")
-      fitWeibull <- fitdist(inputData[,i], "weibull", method = c("CvM"))
+      # fitWeibull <- fitdist(inputData[,i], "weibull", method = "mge")
 
 
-      listFits = list(fitNormal, fitGamma, fitWeibull)
+      listFits = list(fitNormal, fitGamma)#, fitWeibull)
 
-      fits = gofstat(listFits, fitnames=c("norm", "gamma", "weibull"))
+      fits = gofstat(listFits, fitnames=c("norm", "gamma"))#, "weibull"))
 
       simData[,i] = round(eval(parse(text = paste0("r", names(which.min(fits$aic)), '(', 'n, ',
                                    listFits[[which.min(fits$aic)[[1]]]][[1]][[1]], ', ',
