@@ -7,11 +7,11 @@ Authors@R: as.person(c(
     "Tony Boyles <nsp3@cdc.gov> [aut, cre]",
     "Ells Campbell <ykk7@cdc.gov> [aut]"
     ))
-Description: Allows users to input a dataset and from the distributions of the variables, they can sample
-    and create a new dataset that is distributionally similar to the original. Users can sample in a univariate manner --
-    every variable is independent, or allow for 2 variables to be associated and sample from that bivariate distribution.
-    User is also able to get a list of all categorical variable pairs as well as continuous variable pairs. If they want
-    the p-values between those pairs, that's possible too. 
+Description: Allows users to input a dataset and sample from the distributions of the variables to create a new 
+    dataset that is distributionally similar to the original. Users can sample in a univariate manner or allow
+    2 variables to be associated and sample from that bivariate distribution.
+    The user is also able to get a list of all categorical variable pairs as well as continuous variable pairs. 
+    If they want the p-values between those pairs, that's possible too. 
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
