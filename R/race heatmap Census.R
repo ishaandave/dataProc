@@ -26,6 +26,7 @@ library(maps)
 library(usmap)
 library(dplyr)
 library(ggplot2)
+library(plyr)
 ## create function to plot whatever race/ethnicity across the US
 
 raceDistribution = function (race) {
