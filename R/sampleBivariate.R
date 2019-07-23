@@ -3,11 +3,11 @@
 
 #' Title
 #'
-#' @param inputData
-#' @param listVars
-#' @param n
+#' @param inputData dataset that you want to sample from
+#' @param listVars dataframe of variable pairs that are associated
+#' @param n number of rows in output/simulated dataset
 #'
-#' @return
+#' @return  simData -- distributionally similar to input dataset
 #' @export
 #'
 #' @examples
