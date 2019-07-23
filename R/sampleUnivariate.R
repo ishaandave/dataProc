@@ -19,7 +19,8 @@ library(fitdistrplus)
 #'
 #' @return simData -- distributionally similar to input dataset
 #'
-
+#' @examples
+#' sampleUnivariate()
 
 sampleUnivariate = function (inputData, n, dateFormat = "%Y%m%d") {
 

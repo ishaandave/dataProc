@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-#'
+#'pairsCatVars()
 #'
 pairsCatVars = function (inputData) {
 

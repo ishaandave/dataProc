@@ -6,7 +6,8 @@
 #' @param inputData dataset that you want to sample from
 #'
 #' @return correlations p-values for each pair of continuous variables
-
+#' @examples
+#' continuousPvals()
 
 continuousPvals = function (inputData) {
 

@@ -8,6 +8,9 @@
 #' @export
 #'
 #' @examples
+#' pairsContVars()
+#'
+#'
 pairsContVars = function (inputData) {
 
   corPvals = matrix(nrow = ncol(inputData)**2, ncol = 4)

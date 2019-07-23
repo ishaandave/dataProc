@@ -10,6 +10,7 @@
 #' @export
 #'
 #' @examples
+#' sampleBivariate()
 #'
 sampleBivariate = function(inputData, n, listVars, dateFormat = "%Y%m%d") {
 
