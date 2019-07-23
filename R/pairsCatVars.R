@@ -7,6 +7,8 @@
 #'
 #' @export
 #'
+#' @importFrom stats cor.test na.omit
+#'
 #' @examples
 #'pairsCatVars()
 #'

@@ -16,6 +16,9 @@
 #' @export
 #'
 #'
+#' @importFrom fitdistrplus fitdist gofstat
+#'
+#'
 #' @examples
 #' sampleUnivariate()
 

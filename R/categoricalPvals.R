@@ -9,6 +9,8 @@
 #'
 #' @export
 #'
+#' @importFrom stats chisq.test na.omit
+#'
 #' @examples
 #' categoricalPvals()
 
