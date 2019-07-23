@@ -6,11 +6,11 @@
 #'
 #' Returns distributionally similar dataset
 #'
-#' @param inputData dataset that you want to sample from
+#' @param inputData "true" dataset that you want to sample from
 #' @param n number of rows in output/simulated dataset
-#' @param dateFormat if date variable exists in dataset, it's the format the date must be read in
+#' @param dateFormat format of the date variable (if one exists) in the original dataset
 #'
-#' @return simData -- distributionally similar to input dataset
+#' @return simData -- a dataset with n rows that is distributionally similar to input dataset
 #'
 #'
 #' @export

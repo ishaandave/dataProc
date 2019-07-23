@@ -4,7 +4,7 @@
 \alias{categoricalPvals}
 \title{Associations between each pair of categorical variables}
 \usage{
-categoricalPvals(indat)
+categoricalPvals(inputData)
 }
 \arguments{
 \item{inputData}{dataset that you want to sample from}

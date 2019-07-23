@@ -1,7 +1,7 @@
 
 #' Pairs of all categorical variables
 #'
-#' @param inputData dataset that you want to sample from
+#' @param inputData dataset that you want investigate
 #'
 #' @return list of all pairs of categorical variables that may or may not be associated
 #'
