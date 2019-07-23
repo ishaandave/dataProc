@@ -14,15 +14,12 @@ library(fitdistrplus)
 
 
 
-dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
+sampleUnivariate = function (inputData, n, seed = 1, dateFormat = "%Y%m%d") {
 
   simData = data.frame(matrix(nrow = n, ncol = ncol(inputData)))
 
   ## getting distribution of each variable and randomly sampling from that to get new dataset
 
-  if (!missing(seed)) {
-    set.seed(seed)
-  }
 
   for (i in 1:ncol(inputData))  { # (1)
 
@@ -75,13 +72,13 @@ dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
 
       fitNormal  <- fitdist(inputData[,i], "norm", method = "mme")
       fitGamma   <- fitdist(inputData[,i], "gamma", method = "mme")
-      fitLogNorm <- fitdist(abs(inputData[,i]), "lnorm", method = "mme")
+      # fitLogNorm <- fitdist(abs(inputData[,i]), "lnorm", method = "mme")
       fitWeibull <- fitdist(inputData[,i], "weibull", method = c("mge"))
 
 
-      listFits = list(fitNormal, fitGamma, fitLogNorm, fitWeibull)
+      listFits = list(fitNormal, fitGamma, fitWeibull)
 
-      fits = gofstat(listFits, fitnames=c("norm", "gamma", "lnorm", "weibull"))
+      fits = gofstat(listFits, fitnames=c("norm", "gamma", "weibull"))
 
       simData[,i] = round(eval(parse(text = paste0("r", names(which.min(fits$aic)), '(', 'n, ',
                                    listFits[[which.min(fits$aic)[[1]]]][[1]][[1]], ', ',
