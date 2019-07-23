@@ -2,14 +2,21 @@ Package: dataProc
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
-Author: Ishaan Dave, Tony Boyles, Ellsworth Campbell
-Maintainer: Ishaan <ishaandave2@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: as.person(c(
+    "Ishaan Dave <yhd8@cdc.gov> [aut, cre]"
+    "Tony Boyles <nsp3@cdc.gov> [aut, cre]""
+    "Ells Campbell <ykk7@cdc.gov> [cre]"
+    ))
+Description: Allows users to input a dataset and from the distributions of the variables, they can sample
+    and create a new dataset that is distributionally similar to the original. Users can sample in a univariate manner --
+    every variable is independent, or allow for 2 variables to be associated and sample from that bivariate distribution.
+    User is also able to get a list of all categorical variable pairs as well as continuous variable pairs. If they want
+    the p-values between those pairs, that's possible too. 
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Year: 2019
 Imports:
     lubridate,
     stringr,
