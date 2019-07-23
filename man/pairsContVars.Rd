@@ -11,8 +11,6 @@ pairsContVars(inputData)
 }
 \value{
 list of all pairs of continuous variables that may be correlated
-
- @export
 }
 \description{
 Pairs of all continuous variables that may be associated
