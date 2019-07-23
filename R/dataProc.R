@@ -76,13 +76,13 @@ dataProc = function (inputData, n, seed, dateFormat = "%Y%m%d") {
 
       fitNormal  <- fitdist(inputData[,i], "norm", method = "mme")
       fitGamma   <- fitdist(inputData[,i], "gamma", method = "mme")
-      #fitLogNorm <- fitdist(abs(inputData[,i]), "lnorm", method = "mme")
-      #fitWeibull <- fitdist(inputData[,i], "weibull", method = c("mge"))
+      fitLogNorm <- fitdist(abs(inputData[,i]), "lnorm", method = "mme")
+      fitWeibull <- fitdist(inputData[,i], "weibull", method = c("mge"))
 
 
-      listFits = list(fitNormal, fitGamma)
+      listFits = list(fitNormal, fitGamma, fitLogNorm, fitWeibull)
 
-      fits = gofstat(list(fitNormal, fitGamma), fitnames=c("norm", "gamma"))
+      fits = gofstat(listFits, fitnames=c("norm", "gamma", "lnorm", "weibull"))
 
       simData[,i] = round(eval(parse(text = paste0("r", names(which.min(fits$aic)), '(', 'n, ',
                                    listFits[[which.min(fits$aic)[[1]]]][[1]][[1]], ', ',
