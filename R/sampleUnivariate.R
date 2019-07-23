@@ -25,7 +25,7 @@
 sampleUnivariate = function (inputData, n, dateFormat = "%Y%m%d") {
 
   simData = data.frame(matrix(nrow = n, ncol = ncol(inputData)))
-
+  inputData = data.frame(inputData)
   ## getting distribution of each variable and randomly sampling from that to get new dataset
 
 

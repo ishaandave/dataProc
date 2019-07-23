@@ -14,6 +14,8 @@
 #'
 pairsContVars = function (inputData) {
 
+
+  inputData = data.frame(inputData)
   corPvals = matrix(nrow = ncol(inputData)**2, ncol = 4)
 
   nrowsPval = 0

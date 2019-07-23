@@ -14,6 +14,8 @@
 #'
 pairsCatVars = function (inputData) {
 
+
+  inputData = data.frame(inputData)
   pVals = matrix(nrow = ncol(inputData)**2, ncol = 4)
 
   nrowsPval = 0
