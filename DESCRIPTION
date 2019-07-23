@@ -1,10 +1,10 @@
 Package: dataProc
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Simulate A New Dataset Based on Distribution of a Given Dataset
 Version: 0.1.0
 Authors@R: as.person(c(
-    "Ishaan Dave <yhd8@cdc.gov> [aut, cre]",
-    "Tony Boyles <nsp3@cdc.gov> [aut]",
+    "Ishaan Dave <yhd8@cdc.gov> [aut]",
+    "Tony Boyles <nsp3@cdc.gov> [aut, cre]",
     "Ells Campbell <ykk7@cdc.gov> [aut]"
     ))
 Description: Allows users to input a dataset and from the distributions of the variables, they can sample
