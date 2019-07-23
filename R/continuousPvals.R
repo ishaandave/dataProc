@@ -1,10 +1,11 @@
-#' function gives correlations and p values of all pairwise comparisons of continuous variables
+#' Correlations between each pair of continuous variables
 #'
-#' user can input any dataset, and this will return only associations between continuous variables
+#' This gives correlations and p values of all pairwise comparisons of continuous variables
+#' User can input any dataset, and this will return only associations between continuous variables
 #'
 #' @param inputData
 #'
-#' @return lists correlations and corresponding p-values for each pair of continuous variables
+#' @return correlations p-values for each pair of continuous variables
 
 
 continuousPvals = function (inputData) {
