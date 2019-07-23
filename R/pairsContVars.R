@@ -1,26 +1,34 @@
-#' returns list of all possible pairwise continuous variables
 
-pairsContVars = function (indat) {
 
-  corPvals = matrix(nrow = ncol(indat)**2, ncol = 4)
+#' Pairs of all continuous variables that may be associated
+#'
+#' @param inputData dataset that you want to sample from
+#'
+#' @return list of all pairs of continuous variables that may be correlated
+#' @export
+#'
+#' @examples
+pairsContVars = function (inputData) {
+
+  corPvals = matrix(nrow = ncol(inputData)**2, ncol = 4)
 
   nrowsPval = 0
 
-  for (i in 1:ncol(indat)) {
+  for (i in 1:ncol(inputData)) {
 
-    for (j in 1:ncol(indat)) {
+    for (j in 1:ncol(inputData)) {
 
       if (i == j) next
 
-      if ((is.numeric(indat[,i]) & length(unique(indat[,i])) > 5) &
-          (is.numeric(indat[,j]) & length(unique(indat[,j])) > 5)) {
+      if ((is.numeric(inputData[,i]) & length(unique(inputData[,i])) > 5) &
+          (is.numeric(inputData[,j]) & length(unique(inputData[,j])) > 5)) {
 
-        correlation = cor.test(indat[,i], indat[,j])
+        correlation = cor.test(inputData[,i], inputData[,j])
 
         nrowsPval = nrowsPval + 1;
 
 
-        corPvals[nrowsPval, 1] = paste0(names(indat)[i], ", ", names(indat)[j])
+        corPvals[nrowsPval, 1] = paste0(names(inputData)[i], ", ", names(inputData)[j])
         corPvals[nrowsPval, 2] = round(correlation$estimate, 3)
         corPvals[nrowsPval, 3] = paste0("(",round(correlation$conf.int[1],3), ", ",
                                         round(correlation$conf.int[2],3), ")")

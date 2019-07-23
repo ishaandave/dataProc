@@ -3,7 +3,7 @@
 #' This gives associations (\Chi^2 values) and p values of all pairwise comparisons of categorical variables
 #' User can input any dataset, and this will return only associations between categorical variables
 #'
-#' @param inputData
+#' @param inputData dataset that you want to sample from
 #'
 #' @return associations p-values for each pair of categorical variables
 

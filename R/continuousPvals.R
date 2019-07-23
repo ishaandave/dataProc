@@ -3,7 +3,7 @@
 #' This gives correlations and p values of all pairwise comparisons of continuous variables
 #' User can input any dataset, and this will return only associations between continuous variables
 #'
-#' @param inputData
+#' @param inputData dataset that you want to sample from
 #'
 #' @return correlations p-values for each pair of continuous variables
 
