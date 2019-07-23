@@ -78,7 +78,7 @@ sampleUnivariate = function (inputData, n, dateFormat = "%Y%m%d") {
       fitNormal  <- fitdist(inputData[,i], "norm", method = "mme")
       fitGamma   <- fitdist(inputData[,i], "gamma", method = "mme")
       # fitLogNorm <- fitdist(abs(inputData[,i]), "lnorm", method = "mme")
-      fitWeibull <- fitdist(inputData[,i], "weibull", method = c("mge"))
+      fitWeibull <- fitdist(inputData[,i], "weibull", method = c("CvM"))
 
 
       listFits = list(fitNormal, fitGamma, fitWeibull)
