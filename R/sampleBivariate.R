@@ -16,6 +16,7 @@ sampleBivariate = function(inputData, n, listVars, dateFormat = "%Y%m%d") {
 
   outputData = sampleUnivariate(inputData, n, dateFormat)
 
+  inputData = data.frame(inputData)
 
   for (i in 1:nrow(listVars)) {
 
