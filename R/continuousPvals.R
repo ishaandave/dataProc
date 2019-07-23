@@ -1,24 +1,28 @@
 #' function gives correlations and p values of all pairwise comparisons of continuous variables
 #'
 #' user can input any dataset, and this will return only associations between continuous variables
+#'
+#' @param inputData
+#'
+#' @return lists correlations and corresponding p-values for each pair of continuous variables
 
 
-continuousPvals = function (indat) {
+continuousPvals = function (inputData) {
 
-  contPvals = matrix(nrow = ncol(indat)**2, ncol = 4)
+  contPvals = matrix(nrow = ncol(inputData)**2, ncol = 4)
 
   nrowsPval = 0
 
-  for (i in 1:ncol(indat)) {
+  for (i in 1:ncol(inputData)) {
 
-    for (j in 1:ncol(indat)) {
+    for (j in 1:ncol(inputData)) {
 
       if (i == j) next
 
-      if ((is.numeric(indat[,i]) & length(unique(indat[,i])) > 5) &
-          (is.numeric(indat[,j]) & length(unique(indat[,j])) > 5)) {
+      if ((is.numeric(inputData[,i]) & length(unique(inputData[,i])) > 5) &
+          (is.numeric(inputData[,j]) & length(unique(inputData[,j])) > 5)) {
 
-        correlation = cor.test(indat[,i], indat[,j])
+        correlation = cor.test(inputData[,i], inputData[,j])
 
         nrowsPval = nrowsPval + 1;
 
@@ -27,7 +31,7 @@ continuousPvals = function (indat) {
                                         round(correlation$conf.int[2],3), ")")
 
         contPvals[nrowsPval, 3] = round(correlation$p.value, 3)
-        contPvals[nrowsPval, 4] = paste0(names(indat)[i], ",", names(indat)[j])
+        contPvals[nrowsPval, 4] = paste0(names(inputData)[i], ",", names(inputData)[j])
 
 
         contPvals2 = as.data.frame(contPvals[!duplicated(contPvals[,c(1,2,3)]),])
